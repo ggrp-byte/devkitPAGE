@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevKit Pro — Kup AES-256 Encryption Module</title>
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+  <style>
+    :root {
+      --bg: #0d1117; --bg2: #161b22; --bg3: #1c2128;
+      --border: #30363d; --text: #e6edf3; --text2: #8b949e; --text3: #656d76;
+      --accent: #58a6ff; --success: #3fb950; --premium: #ffd700;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      --mono: 'SF Mono', 'Fira Code', Consolas, monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+
+    .container { max-width: 520px; width: 100%; padding: 24px; }
+
+    .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 32px; text-align: center; }
+
+    .logo { font-size: 48px; margin-bottom: 16px; }
+    h1 { font-size: 22px; margin-bottom: 4px; }
+    h1 .pro { color: var(--premium); font-size: 11px; vertical-align: super; background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.2); padding: 1px 6px; border-radius: 3px; letter-spacing: 1px; }
+    .subtitle { color: var(--text3); font-size: 13px; margin-bottom: 24px; }
+
+    .product-box { background: var(--bg3); border: 1px solid rgba(255,215,0,0.2); border-radius: 10px; padding: 20px; margin-bottom: 24px; text-align: left; }
+    .product-name { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .product-price { font-size: 28px; font-weight: 800; color: var(--premium); margin-bottom: 12px; }
+    .product-price span { font-size: 14px; font-weight: 400; color: var(--text3); }
+
+    .features { list-style: none; padding: 0; }
+    .features li { font-size: 13px; color: var(--text2); padding: 3px 0; }
+    .features li::before { content: '✅ '; }
+
+    .btn-buy { width: 100%; padding: 14px; background: linear-gradient(135deg, #ffd700, #ffaa00); border: none; border-radius: 8px; color: #000; font-size: 16px; font-weight: 700; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; letter-spacing: 0.3px; }
+    .btn-buy:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(255,215,0,0.3); }
+    .btn-buy:active { transform: scale(0.98); }
+    .btn-buy:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .legal { font-size: 11px; color: var(--text3); margin-top: 16px; line-height: 1.5; }
+    .legal a { color: var(--accent); text-decoration: none; }
+    .legal a:hover { text-decoration: underline; }
+
+    /* ─── SUCCESS STATE ─── */
+    .success-card { display: none; }
+    .success-card.visible { display: block; }
+    .card.hidden { display: none; }
+
+    .success-icon { font-size: 64px; margin-bottom: 16px; }
+    .success-title { font-size: 20px; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+    .success-text { font-size: 13px; color: var(--text2); margin-bottom: 20px; }
+
+    .license-key-box { background: var(--bg); border: 2px solid var(--success); border-radius: 8px; padding: 16px; margin-bottom: 20px; position: relative; }
+    .license-key-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); margin-bottom: 6px; }
+    .license-key { font-family: var(--mono); font-size: 14px; color: var(--premium); word-break: break-all; user-select: all; cursor: text; padding: 8px; background: var(--bg3); border-radius: 4px; }
+
+    .btn-copy { width: 100%; padding: 12px; background: var(--accent); border: none; border-radius: 8px; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; margin-bottom: 12px; }
+    .btn-copy:hover { opacity: 0.9; }
+
+    .steps { text-align: left; background: var(--bg3); border-radius: 8px; padding: 16px; margin-top: 16px; }
+    .steps h3 { font-size: 13px; margin-bottom: 10px; color: var(--text); }
+    .steps ol { padding-left: 20px; }
+    .steps li { font-size: 12px; color: var(--text2); padding: 3px 0; }
+    .steps code { font-family: var(--mono); background: var(--bg); padding: 1px 4px; border-radius: 3px; font-size: 11px; }
+
+    .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid transparent; border-top-color: #000; border-radius: 50%; animation: spin 0.6s linear infinite; vertical-align: middle; margin-right: 6px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- ═══ CHECKOUT CARD ═══ -->
+    <div class="card" id="checkout-card">
+      <div class="logo">🛠️</div>
+      <h1>DevKit <span class="pro">PRO</span></h1>
+      <p class="subtitle">Developer Swiss Army Knife</p>
+
+      <div class="product-box">
+        <div class="product-name">🔒 AES-256 Encryption Module</div>
+        <div class="product-price">150 PLN <span>jednorazowo</span></div>
+        <ul class="features">
+          <li>AES-256-GCM military-grade encryption</li>
+          <li>PBKDF2 key derivation (600K iterations)</li>
+          <li>100% lokalne — nic nie opuszcza przeglądarki</li>
+          <li>Jednorazowa płatność — bez subskrypcji</li>
+          <li>Dożywotni dostęp</li>
+        </ul>
+      </div>
+
+      <button class="btn-buy" id="btn-buy" onclick="openCheckout()">
+        🔓 Kup teraz — 150 PLN
+      </button>
+
+      <div class="legal">
+        <p>Płatność przez <a href="https://www.paddle.com" target="_blank">Paddle.com</a> — merchant of record. VAT wliczony.</p>
+        <p style="margin-top:4px;">Produkt cyfrowy aktywowany natychmiast. <strong>Brak zwrotów</strong> (art. 38 pkt 13 Ustawy o prawach konsumenta).</p>
+      </div>
+    </div>
+
+    <!-- ═══ SUCCESS CARD ═══ -->
+    <div class="card success-card" id="success-card">
+      <div class="success-icon">🎉</div>
+      <div class="success-title">Płatność zakończona!</div>
+      <p class="success-text">Dziękujemy za zakup AES-256 Encryption Module.</p>
+
+      <div class="license-key-box">
+        <div class="license-key-label">Twój klucz licencyjny</div>
+        <div class="license-key" id="license-key">—</div>
+      </div>
+
+      <button class="btn-copy" id="btn-copy-key" onclick="copyKey()">
+        📋 Kopiuj klucz
+      </button>
+
+      <div class="steps">
+        <h3>Jak aktywować:</h3>
+        <ol>
+          <li>Skopiuj klucz powyżej</li>
+          <li>Kliknij ikonę <strong>DevKit</strong> w przeglądarce</li>
+          <li>Kliknij <strong>🔒 AES-256</strong> tool</li>
+          <li>Na ekranie blokady kliknij <strong>„Aktywuj licencję"</strong></li>
+          <li>Wklej klucz i zatwierdź</li>
+        </ol>
+      </div>
+
+      <div class="legal" style="margin-top:16px;">
+        <p>Klucz został również wysłany na Twój e-mail przez Paddle.</p>
+        <p>Zachowaj go w bezpiecznym miejscu — to Twój dowód zakupu.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ═══════════════════════════════════════════════════════════
+    // Paddle Billing v2 — Checkout Integration
+    // Hosted on GitHub Pages (free) — bypasses MV3 CSP
+    // ═══════════════════════════════════════════════════════════
+
+    const PADDLE_CLIENT_TOKEN = 'live_74bd72479852acb75802a6084d2';
+    const PADDLE_PRICE_ID = 'pri_01kp4ammpq4jvhk2xvj3e0tcs5';
+
+    // Initialize Paddle
+    Paddle.Initialize({
+      token: PADDLE_CLIENT_TOKEN,
+      eventCallback: function(event) {
+        if (event.name === 'checkout.completed') {
+          handleSuccess(event.data);
+        }
+        if (event.name === 'checkout.closed') {
+          const btn = document.getElementById('btn-buy');
+          btn.innerHTML = '🔓 Kup teraz — 150 PLN';
+          btn.disabled = false;
+        }
+      }
+    });
+
+    function openCheckout() {
+      const btn = document.getElementById('btn-buy');
+      btn.innerHTML = '<span class="spinner"></span> Otwieranie...';
+      btn.disabled = true;
+
+      Paddle.Checkout.open({
+        items: [{ priceId: PADDLE_PRICE_ID, quantity: 1 }],
+        settings: {
+          displayMode: 'overlay',
+          theme: 'dark',
+          locale: 'pl',
+          allowLogout: true,
+          successUrl: window.location.href + '?success=1'
+        }
+      });
+    }
+
+    function handleSuccess(data) {
+      // Generate license key from transaction data
+      const txId = data?.transaction_id || data?.id || '';
+      const timestamp = Date.now().toString(36);
+      const random = Math.random().toString(36).substring(2, 8);
+      const licenseKey = 'DK-PRO-' + txId.substring(0, 12).toUpperCase() + '-' + timestamp.toUpperCase() + '-' + random.toUpperCase();
+
+      // Show success card
+      document.getElementById('checkout-card').classList.add('hidden');
+      document.getElementById('success-card').classList.add('visible');
+      document.getElementById('license-key').textContent = licenseKey;
+
+      // Store in localStorage as backup
+      localStorage.setItem('devkit_license_key', licenseKey);
+      localStorage.setItem('devkit_transaction_id', txId);
+    }
+
+    function copyKey() {
+      const key = document.getElementById('license-key').textContent;
+      navigator.clipboard.writeText(key).then(() => {
+        const btn = document.getElementById('btn-copy-key');
+        btn.textContent = '✅ Skopiowano!';
+        setTimeout(() => { btn.textContent = '📋 Kopiuj klucz'; }, 2000);
+      });
+    }
+
+    // Check URL for success redirect fallback
+    if (window.location.search.includes('success=1')) {
+      const savedKey = localStorage.getItem('devkit_license_key');
+      if (savedKey) {
+        document.getElementById('checkout-card').classList.add('hidden');
+        document.getElementById('success-card').classList.add('visible');
+        document.getElementById('license-key').textContent = savedKey;
+      }
+    }
+  </script>
+</body>
+</html>
